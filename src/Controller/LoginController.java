@@ -1,5 +1,3 @@
-
-
 package Controller;
 
 import DAO.CustomerDAO;
@@ -17,15 +15,15 @@ public class LoginController {
         this.customerDAO = customerDAO;
     }
 
-    public Customer login(String username, String password) {
+    // Returns true if the username and password match a customer
+    public Boolean login(String username, String password) {
 
         if (username == null || username.isBlank()
                 || password == null || password.isBlank()) {
-            return null;
+            return false;
         }
 
-        return customerDAO.getClass(username, password);
+        Customer customer = customerDAO.login(username.trim(), password);
+        return customer != null;
     }
 }
-
-
